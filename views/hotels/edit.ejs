@@ -1,0 +1,68 @@
+<% layout('layout/boilerplate')%>
+    <div class="row">
+        <h1 class="text-center">Edit Hotel</h1>
+        <div class="col-6 offset-3">
+            <form action="/hotels/<%=hotel._id%>?_method=PUT" method="POST" novalidate class="validated-form"
+                enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="hotel[title]" value="<%=hotel.title%>"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="hotel[location]"
+                        value="<%=hotel.location %>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Image Url</label>
+                    <input type="file" name="hotel[image]" id="image" multiple>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Hotel Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
+                            aria-describedby="price-label" name="hotel[price]" value="<%=hotel.price%>" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="hotel[description]"
+                        required><%= hotel.description%></textarea>
+                </div>
+                <div class="mb-3">
+                    <div class="custom-control custom-checkbox image-checkbox">
+                        <% hotel.images.forEach(function(img, i) { %>
+                            <img src="<%=img.url%>" class="img-thumbnail" alt="">
+
+                            <div class="form-check">
+                                <input class="custom-control-input" type="checkbox" id="image-<%=i%>"
+                                    name="deleteImages[]" value="<%=img.filename%>">
+                                <label for="image-<%=i%>" class="form-check-label">Delete</label>
+
+                            </div>
+
+                            <% })%>
+                    </div>
+
+
+
+                    <!-- <div class="custom-control custom-checkbox image-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="ck1a">
+                            <label class="custom-control-label" for="ck1a">
+                                <img src="img/annie-spratt.jpg" alt="#" class="img-fluid">
+                            </label>
+                        </div> -->
+                </div>
+
+
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Hotel</button>
+                </div>
+            </form>
+            <a href="/hotels/<%= hotel._id%>">Back To Hotel</a>
+
+        </div>
+    </div>
