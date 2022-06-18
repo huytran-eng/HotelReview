@@ -14,7 +14,7 @@ router.get('/new', isLoggedIn, hotel.renderNew)
 
 router.get('/:id', catchAsync(hotel.show));
 
-router.post('/', upload.array('hotel[image]'), isLoggedIn, validateHotel, catchAsync(hotel.createNew));
+router.post('/', isLoggedIn, upload.array('hotel[image]'), validateHotel, catchAsync(hotel.createNew));
 
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(hotel.renderEdit))
 
